@@ -59,8 +59,8 @@ same commit (a clean OnionOS fork); no Tropea-specific code exists yet.
   (Upstream OnionOS used plain subjects with PR numbers; TropeaOS uses Conventional Commits.)
 - CI branch: PRs target `main`; merging uses squash (workflows on `pull_request`/`merge_group`).
 - Onion-coupled identity is being phased out: workflows read the toolchain image from the
-  `TOOLCHAIN_IMAGE` repo Variable (fallback to the Onion image), and theme downloads default to
-  the `anacromaniac/TropeaOS-Themes` fork via `THEMES_REPO`.
+  `TOOLCHAIN_IMAGE` repo Variable (default/fallback: the TropeaOS GHCR image), and theme
+  downloads default to the `anacromaniac/TropeaOS-Themes` fork via `THEMES_REPO`.
 - Runtime config is read from `/mnt/SDCARD/.tmp_update/config/`; transient flags live in `/tmp`.
 - Device model is detected at boot (`DEVICE_ID` 283 = Mini, 354 = Mini Plus); branch on it
   where hardware differs.
