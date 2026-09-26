@@ -1,10 +1,12 @@
 name: Deploy Docs to GitHub Pages
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'website/**/*'
+  # Disabled until TropeaOS has its own docs/branding and first release.
+  # Restore the push trigger below to re-enable automatic deployment.
+  # push:
+  #   branches: [main]
+  #   paths:
+  #     - 'website/**/*'
   workflow_dispatch:
 
 jobs:

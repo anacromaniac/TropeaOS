@@ -10,7 +10,7 @@ jobs:
     name: Tagged release
     runs-on: ubuntu-latest
     container:
-      image: aemiii91/miyoomini-toolchain:latest
+      image: ${{ vars.TOOLCHAIN_IMAGE || 'aemiii91/miyoomini-toolchain:latest' }}
       options: --user root
     steps:
     - name: Checkout repository

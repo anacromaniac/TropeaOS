@@ -1,10 +1,12 @@
 name: Test Docs deployment
 
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - 'website/**/*'
+  # Disabled until TropeaOS has its own docs/branding.
+  # Restore the pull_request trigger below to re-enable.
+  # pull_request:
+  #   branches: [main]
+  #   paths:
+  #     - 'website/**/*'
   workflow_dispatch:
 
 jobs:
