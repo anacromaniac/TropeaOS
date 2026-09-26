@@ -61,6 +61,9 @@ same commit (a clean OnionOS fork); no Tropea-specific code exists yet.
 - Onion-coupled identity is being phased out: workflows read the toolchain image from the
   `TOOLCHAIN_IMAGE` repo Variable (default/fallback: the TropeaOS GHCR image), and theme
   downloads default to the `anacromaniac/TropeaOS-Themes` fork via `THEMES_REPO`.
+
+- Theme downloads are **non-blocking** by default (a failure degrades to "no themes").
+  Release workflows set `THEMES_STRICT=1`, which makes theme fetch failures abort the build.
 - Runtime config is read from `/mnt/SDCARD/.tmp_update/config/`; transient flags live in `/tmp`.
 - Device model is detected at boot (`DEVICE_ID` 283 = Mini, 354 = Mini Plus); branch on it
   where hardware differs.

@@ -23,6 +23,8 @@ jobs:
         echo "BUILD_VERSION=${TAG#v}" >> $GITHUB_ENV
     - name: Build release
       shell: bash
+      env:
+        THEMES_STRICT: "1"
       run: |
         source /root/.bashrc
         VERSION_OVERRIDE=${{ env.BUILD_VERSION }} make release
