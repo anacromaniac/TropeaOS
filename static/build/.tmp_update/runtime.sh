@@ -435,9 +435,15 @@ launch_game() {
 
     log "cmd retval: $retval"
 
+    forced_retroarch_kill=0
+    if [ -f /tmp/.forceKillRetroarch ]; then
+        forced_retroarch_kill=1
+        rm -f /tmp/.forceKillRetroarch
+    fi
+
     if [ $retval -eq 404 ]; then
         infoPanel --title "File not found" --message "The requested file was not found." --auto
-    elif [ $retval -ge 128 ] && [ $retval -ne 143 ] && [ $retval -ne 255 ] && [ ! -f /tmp/.forceKillRetroarch ]; then
+    elif [ $retval -ge 128 ] && [ $retval -ne 143 ] && [ $retval -ne 255 ] && [ $forced_retroarch_kill -eq 0 ]; then
         infoPanel --title "Fatal error occurred" --message "The program exited unexpectedly.\n(Error code: $retval)" --auto
     fi
 
