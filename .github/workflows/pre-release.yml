@@ -35,6 +35,8 @@ jobs:
         echo "Onion-v${{ env.BUILD_VERSION }}-${{ env.SHA_SHORT }}"
     - name: Build release
       shell: bash
+      env:
+        THEMES_STRICT: "1"
       run: |
         source /root/.bashrc
         VERSION_OVERRIDE=${{ env.BUILD_VERSION }}-${{ env.SHA_SHORT }} make release
