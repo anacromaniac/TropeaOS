@@ -501,6 +501,17 @@ int main(void)
             printf_debug("Keymon input: code=%d, value=%d\n", ev.code,
                          ev.value);
 
+            // Refresh the cached system state once per input event, before
+            // any handler reads it, so handlers never act on a stale value
+            // (e.g. MODE_UNKNOWN at boot or the previous mode after returning
+            // from a game). Skip REPEAT events: they fire continuously while a
+            // key is held and system_state_update() scans /proc, so refreshing
+            // on every repeat would cause a scan storm. State changes are
+            // still picked up on PRESSED/RELEASED and by the
+            // /tmp/state_changed handling below.
+            if (val != REPEAT)
+                system_state_update();
+
             if (exists("/tmp/settings_changed")) {
                 settings_load();
                 remove("/tmp/settings_changed");
