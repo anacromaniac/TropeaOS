@@ -48,7 +48,7 @@ ifeq (,$(GTEST_INCLUDE_DIR))
 GTEST_INCLUDE_DIR = /usr/include/
 endif
 
-TOOLCHAIN := aemiii91/miyoomini-toolchain:latest
+TOOLCHAIN ?= aemiii91/miyoomini-toolchain:latest
 
 include ./src/common/commands.mk
 
