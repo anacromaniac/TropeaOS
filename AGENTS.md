@@ -57,7 +57,10 @@ same commit (a clean OnionOS fork); no Tropea-specific code exists yet.
   `ci: make workflows fork-agnostic`, `docs: add AGENTS.md`, `fix(keymon): suspend logic`.
   Use `feat`, `fix`, `ci`, `docs`, `refactor`, `test`, `chore`; short imperative summary.
   (Upstream OnionOS used plain subjects with PR numbers; TropeaOS uses Conventional Commits.)
-- CI branch: PRs target `main`; merging uses squash (workflows on `pull_request`/`merge_group`).
+- CI branch: PRs target `main` (workflows run on `pull_request`/`merge_group`).
+  Merge method is chosen case by case: **squash** for iterative/multi-commit PRs where the
+  history is noise (yields one clean entry), **rebase** when the commits are already clean
+  and individually meaningful. Don't default to a single method.
 - Onion-coupled identity is being phased out: workflows read the toolchain image from the
   `TOOLCHAIN_IMAGE` repo Variable (default/fallback: the TropeaOS GHCR image), and theme
   downloads default to the `anacromaniac/TropeaOS-Themes` fork via `THEMES_REPO`.
