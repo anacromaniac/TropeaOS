@@ -1,11 +1,27 @@
 #!/bin/bash
 
+# Repository hosting the themes (owner/repo).
+# Defaults to the TropeaOS themes fork; override via env if needed, e.g.:
+#   THEMES_REPO=OnionUI/Themes ./get_themes.sh
+THEMES_REPO="${THEMES_REPO:-anacromaniac/TropeaOS-Themes}"
+THEMES_BRANCH="${THEMES_BRANCH:-main}"
+
 mkdir -p cache
 cd cache
 
-wget -O featured.txt https://raw.githubusercontent.com/OnionUI/Themes/main/.github/data/featured.txt > /dev/null 2>&1
+featured_url="https://raw.githubusercontent.com/${THEMES_REPO}/${THEMES_BRANCH}/.github/data/featured.txt"
+if ! wget -O featured.txt "$featured_url" > /dev/null 2>&1; then
+    echo "-- WARN: could not fetch featured themes list from ${THEMES_REPO} (building without themes)"
+    rm -f ./featured.txt
+    exit 0
+fi
 featured=`cat ./featured.txt`
 rm -f ./featured.txt
+
+if [ -z "$featured" ]; then
+    echo "-- WARN: featured themes list is empty (building without themes)"
+    exit 0
+fi
 
 readarray -t themes <<< "$featured"
 
@@ -24,7 +40,11 @@ do
     if [[ ! -f "$zipfile" ]]
     then
         echo "-- downloading theme: $element"
-        wget -O "$zipfile" "https://github.com/OnionUI/Themes/raw/main/release/$element.zip" -q --show-progress
+        if ! wget -O "$zipfile" "https://github.com/${THEMES_REPO}/raw/${THEMES_BRANCH}/release/$element.zip" -q --show-progress; then
+            echo "-- WARN: failed to download theme '$element' (skipping)"
+            rm -f "$zipfile"
+            continue
+        fi
     fi
 
     if [ "$element" == "Silky by DiMo" ]; then
