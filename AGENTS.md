@@ -2,8 +2,7 @@
 
 TropeaOS is a fork of **OnionOS**, a custom operating system for the Miyoo Mini / Mini Plus
 retro handhelds. It is written almost entirely in C and cross-compiled for ARM
-(`PLATFORM=miyoomini`) using a Docker toolchain. `main` and `bootstrap` currently point at the
-same commit (a clean OnionOS fork); no Tropea-specific code exists yet.
+(`PLATFORM=miyoomini`) using a Docker toolchain. No TropeaOS-specific code exists yet.
 
 ## Tech Stack
 - **Language**: C (gnu18) + a little C++17 (the GoogleTest suite)
