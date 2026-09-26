@@ -15,7 +15,7 @@ jobs:
     name: Pre-release
     runs-on: ubuntu-latest
     container:
-      image: ${{ vars.TOOLCHAIN_IMAGE || 'aemiii91/miyoomini-toolchain:latest' }}
+      image: ${{ vars.TOOLCHAIN_IMAGE || 'ghcr.io/anacromaniac/dev-miyoomini-toolchain:latest' }}
       options: --user root
     steps:
     - name: Checkout repository
